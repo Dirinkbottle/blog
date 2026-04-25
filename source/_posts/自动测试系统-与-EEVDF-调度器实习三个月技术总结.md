@@ -122,7 +122,7 @@ tags:
 - 引用方式：在组件仓库 workflow 中显式拉取 `arceos-hypervisor/axci`（固定分支或 commit），复用其 `axci-affected` 与规则处理逻辑；
 - 在仓库测试入口（如 [tests.sh](https://github.com/yoinspiration/axci/blob/test/auto-target-regression/tests.sh)）接入 `--auto-target` 与 `--base-ref` 参数，支持按基线分支自动选择目标；
 - 在 workflow（如 `.github/workflows/test.yml`）增加 detect 阶段：先计算 `targets`，再按 `target_key` 过滤预置矩阵并输出 JSON；
-- 在执行阶段使用 `matrix.include: ${{ fromJson(...) }}` 并行运行目标任务，`skip_all` 时直接跳过无关 job；
+- 在执行阶段使用 `{% raw %}matrix.include: ${{ fromJson(...) }}{% endraw %}` 并行运行目标任务，`skip_all` 时直接跳过无关 job；
 - 保留回退路径：`axci-affected` 不可用时回退到 shell 规则匹配，保证 CI 可用性与渐进迁移。
 
 #### 规则自定义（可配置能力）
